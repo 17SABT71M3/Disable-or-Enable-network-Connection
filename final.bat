@@ -39,10 +39,15 @@ for /f %%i in ('powershell -c "$str=%delet%;write-host $str"') do set number=%%i
 if !number! LEQ !counter! (echo.GoodChoice 1>NUL) else (echo.Invalid Number&goto tryagain)
 set interface2day=!ptr[%number%]!
 echo.Chosen Interface !!interface2day!!
+CALL :again "!!interface2day!!"
 EndLocal
 setlocal Enabledelayedexpansion
 
 :again
+echo.GERE
+set well_received=%~1
+echo. %well_received%
+set good_works=%well_received%
 echo.^(1^)Disable
 echo.^(2^)Enable
 
@@ -77,12 +82,13 @@ if !number!==1 (goto disable)
 if !number!==2 (goto enable) else (goto Invalid Choice&goto again)
 :disable
 echo.Disabling..
-netsh interface set interface "%interface2day%" disable
+echo. netsh interface set interface "%good_works%" disable
+netsh interface set interface "%good_works%" disable
 goto eof
-Rem.netsh interface set interface "%interface2day%" disable 2>&1>con
+Rem.netsh interface set interface "%good_works%" disable 2>&1>con
 :enable
 echo.Enabling...
-netsh interface set interface "%interface2day%" enable
+netsh interface set interface "%good_works%" enable
 
 :eof
 Pause >nul

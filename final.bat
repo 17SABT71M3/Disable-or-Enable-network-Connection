@@ -1,13 +1,34 @@
+@echo off 
+echo.before proceeding with file cleanup sequence y/n?
+timeout 3
 set /a randum=%random%
+REM start cmd /c "mode 27,10& echo off &cls & title The_Watcher&timeout 7 >NUL& del CSV.NET_ID.NETCONN.%randum%.CSV"
+
+echo. WScript.Sleep 1200 > delete_me_%randum%.vbs
+
+echo. Set objFSO = CreateObject("Scripting.FileSystemObject") >> delete_me_%randum%.vbs
+echo.  If objFSO.FileExists("CSV.NET_ID.NETCONN.%randum%.CSV")  Then      >> delete_me_%randum%.vbs
+echo. objFSO.DeleteFile("CSV.NET_ID.NETCONN.%randum%.CSV") >> delete_me_%randum%.vbs
+echo. End if >> delete_me_%randum%.vbs
+echo.         objFSO.DeleteFile(Wscript.ScriptFullName) >> delete_me_%randum%.vbs
+echo mode 35,10 ^& echo off ^&title File Cleanup Help >start%randum%.bat
+echo cls ^& echo Watcher >>start%randum%.bat
+echo wscript delete_me_%randum%.vbs >>start%randum%.bat
+echo del start%randum%.bat >>start%randum%.bat
+start cmd /c "start%randum%.bat"
+
 wmic nic get netconnectionid,netconnectionstatus,netenabled /format:CSV >> CSV.NET_ID.NETCONN.%randum%.CSV
 type CSV.NET_ID.NETCONN.%randum%.CSV | find /v "NetConnectionID,NetConnectionStatus,NetEnabled" >> CSV.NET_ID.NETCONN.%randum%2.CSV
-del CSV.NET_ID.NETCONN.%randum%.CSV 
+
 ECHO OFF
 CLS
+echo.**************************************************************
+echo. Disable/Enable
+echo.--------------------------------------------------------------
 setlocal enabledelayedexpansion
 set list=
 set /a counter=0
-
+mode 40,20
 for /f "delims=" %%i in (CSV.NET_ID.NETCONN.%randum%2.CSV) do for /f "tokens=1,2,3,4 delims=," %%a in ("%%i") do if "%%b" NEQ "" set interface[!counter!]=%%b&set /a counter+=1
 REM echo. There are !counter! results. Here are the names-
 set /a counter=counter-1

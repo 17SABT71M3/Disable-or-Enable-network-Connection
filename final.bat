@@ -1,18 +1,38 @@
+set /a helper_interval=60
+set /a break_interval=2
+REM set break_interval=0 to skip early messages..
+REM If helper is not clearing up files/cleaning
+REM please adjust above variable helper_interval to make it 
+REM make it shorter/longer if it still works for you
+REM In Milliseconds
 @echo off 
-echo.before proceeding with file cleanup sequence y/n?
-timeout 3
-set /a randum=%random%
-REM start cmd /c "mode 27,10& echo off &cls & title The_Watcher&timeout 7 >NUL& del CSV.NET_ID.NETCONN.%randum%.CSV"
+title Starting...
+mode 30,20
+echo.ATTENTION !!!!!!!!
+echo.~~
+echo.i am 
+echo.initiating 
+echo.
+echo. a
+echo.~FILE CLEANUP SEQUENCE~
+echo.-:JUNK FILE DELETE:-
+echo. 
+echo. using a helper window
+echo.~~
 
-echo. WScript.Sleep 1200 > delete_me_%randum%.vbs
+timeout %break_interval% >NUL
+set /a randum=%random%
+REM start cmd /c "mode 57,7& echo off &cls & title The_Watcher&timeout 7 >NUL& del CSV.NET_ID.NETCONN.%randum%.CSV"
+
+echo. WScript.Sleep %helper_interval% > delete_me_%randum%.vbs
 
 echo. Set objFSO = CreateObject("Scripting.FileSystemObject") >> delete_me_%randum%.vbs
 echo.  If objFSO.FileExists("CSV.NET_ID.NETCONN.%randum%.CSV")  Then      >> delete_me_%randum%.vbs
 echo. objFSO.DeleteFile("CSV.NET_ID.NETCONN.%randum%.CSV") >> delete_me_%randum%.vbs
 echo. End if >> delete_me_%randum%.vbs
 echo.         objFSO.DeleteFile(Wscript.ScriptFullName) >> delete_me_%randum%.vbs
-echo mode 35,10 ^& echo off ^&title File Cleanup Help >start%randum%.bat
-echo cls ^& echo Watcher >>start%randum%.bat
+echo mode 35,8 ^& echo off ^&title Watcher>start%randum%.bat
+echo cls ^& echo Helper^&color B1 >>start%randum%.bat
 echo wscript delete_me_%randum%.vbs >>start%randum%.bat
 echo del start%randum%.bat >>start%randum%.bat
 start cmd /c "start%randum%.bat"
@@ -22,6 +42,7 @@ type CSV.NET_ID.NETCONN.%randum%.CSV | find /v "NetConnectionID,NetConnectionSta
 
 ECHO OFF
 CLS
+title Program: Network Manager
 echo.**************************************************************
 echo. Disable/Enable
 echo.--------------------------------------------------------------
@@ -65,7 +86,7 @@ EndLocal
 setlocal Enabledelayedexpansion
 
 :again
-echo.GERE
+echo.xXx
 set well_received=%~1
 echo. %well_received%
 set good_works=%well_received%

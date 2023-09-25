@@ -1,6 +1,8 @@
 BCDEDIT /ENUM 2>nul 1>nul
 cls
-IF %ERRORLEVEL%==1 TITLE NOT ADMINISTRATOR DETECTED.&echo off&cls&ECHO IT SEEMS U R NOT RUNNING AS ADMINISTRATOR. PLEASE CHECK&timeout 1 >nul&echo (right-click bat file and select "Run as Administrator)"&pause >NUL
+REM I AM A CHRISTIAN 
+REM ****************
+IF %ERRORLEVEL%==1 TITLE NOT ADMINISTRATOR DETECTED.&echo off&cls&ECHO IT SEEMS U R NOT RUNNING AS ADMINISTRATOR :) zz&echo. please RUN as Administrator &&echo. ----------------------------------------------------------------------------------&echo.^|This program cannot make changes to the Network without Administrative Priveleges ^|&echo. ----------------------------------------------------------------------------------&echo.&timeout 1 >nul&echo (right-click bat file and select "Run as Administrator)"&echo.Press any key to continue without Administrative priveleges&pause >NUL
 set /a helper_interval=60
 set /a break_interval=2
 REM set break_interval=0 to skip early messages..

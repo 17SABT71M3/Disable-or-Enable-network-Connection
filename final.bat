@@ -1,3 +1,6 @@
+BCDEDIT /ENUM 2>nul 1>nul
+cls
+IF %ERRORLEVEL%==1 TITLE NOT ADMINISTRATOR DETECTED.&echo off&cls&ECHO IT SEEMS U R NOT RUNNING AS ADMINISTRATOR. PLEASE CHECK&timeout 1 >nul&echo (right-click bat file and select "Run as Administrator)"&pause >NUL
 set /a helper_interval=60
 set /a break_interval=2
 REM set break_interval=0 to skip early messages..
@@ -19,6 +22,8 @@ echo.-:JUNK FILE DELETE:-
 echo. 
 echo. using a helper window
 echo.~~
+echo.PLEASE INCREASE %%HELPER_INTERVAL%% IF 
+ECHO.THIS DOES NOT HELP
 
 timeout %break_interval% >NUL
 set /a randum=%random%
@@ -31,11 +36,13 @@ echo.  If objFSO.FileExists("CSV.NET_ID.NETCONN.%randum%.CSV")  Then      >> del
 echo. objFSO.DeleteFile("CSV.NET_ID.NETCONN.%randum%.CSV") >> delete_me_%randum%.vbs
 echo. End if >> delete_me_%randum%.vbs
 echo.         objFSO.DeleteFile(Wscript.ScriptFullName) >> delete_me_%randum%.vbs
-echo mode 35,8 ^& echo off ^&title Watcher>start%randum%.bat
-echo cls ^& echo Helper^&color B1 >>start%randum%.bat
-echo wscript delete_me_%randum%.vbs >>start%randum%.bat
-echo del start%randum%.bat >>start%randum%.bat
-start cmd /c "start%randum%.bat"
+rem mode 35,8 
+echo off
+title Watcher
+echo.Helper 
+color B1 
+wscript delete_me_%randum%.vbs 
+color F
 
 wmic nic get netconnectionid,netconnectionstatus,netenabled /format:CSV >> CSV.NET_ID.NETCONN.%randum%.CSV
 type CSV.NET_ID.NETCONN.%randum%.CSV | find /v "NetConnectionID,NetConnectionStatus,NetEnabled" >> CSV.NET_ID.NETCONN.%randum%2.CSV

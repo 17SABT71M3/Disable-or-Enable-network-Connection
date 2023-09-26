@@ -3,7 +3,6 @@ REM cls
 REM I AM A CHRISTIAN 
 REM ****************
 
-REM First
 
 REM First
 echo off
@@ -11,7 +10,7 @@ BCDEDIT /ENUM 2>nul 1>nul
 cls
 set special_front=no
 IF %ERRORLEVEL%==0 echo off& cls&title Main&timeout 1 >NUL&set special_front=yes
-IF %ERRORLEVEL%==1 TITLE User Mode.&echo off&cls&echo. ----------------------------------------------------------------------------------&echo.^|This script cannot make changes to the Network without Administrative Priveleges ^|&echo. ----------------------------------------------------------------------------------&echo.&echo.What can you do:&echo.Run this script with administrative priveleges Next time ;)&timeout 1 >nul&echo.&echo.Press any key to continue (Not recommended) &pause >NUL
+IF %ERRORLEVEL%==1 TITLE User Mode.&echo off&cls&echo. ----------------------------------------------------------------------------------&echo.^|This script cannot make changes to the Network without Administrative Priveleges ^|&echo. ----------------------------------------------------------------------------------&echo.timeout 1 >nul&echo.&echo.Press any key to continue .. &pause >NUL
 set /a helper_interval=1600
 set /a break_interval=2
 REM set break_interval=0 to skip early messages..
@@ -23,7 +22,7 @@ REM In Milliseconds
 title Starting...
 if %special_front%==no goto here
 mode 30,5
-echo.Cleaning Files..
+echo.Starting..
 color B1 
 timeout 1 >NUL
 goto there
@@ -31,9 +30,9 @@ goto there
 mode 30,20
 echo.   - ATTENTION -
 echo.This script generates
-echo.extra litter
+echo.some litter
 echo.
-echo.   junk clean-up ! 
+echo.   Clean-up!
 echo.
 echo. Temporary
 echo.  Helper files

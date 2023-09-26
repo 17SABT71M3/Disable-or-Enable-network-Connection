@@ -4,11 +4,14 @@ REM I AM A CHRISTIAN
 REM ****************
 
 REM First
+
+REM First
 echo off
 BCDEDIT /ENUM 2>nul 1>nul
 cls
-IF %ERRORLEVEL%==0 echo off& cls&title Main&echo.------------Welcome!---------------&echo.            to&echo.              Net Disabler&timeout 2 >NUL
-IF %ERRORLEVEL%==1 TITLE User Mode.&echo off&cls&echo. ----------------------------------------------------------------------------------&echo.^|This script cannot make changes to the Network without Administrative Priveleges ^|&echo. ----------------------------------------------------------------------------------&echo.&echo.What can you do:&echo.Run this script with administrative priveleges Next time ;)&timeout 1 >nul&echo (right-click bat file and select "Run as Administrator)"&echo.Press any key to continue running anyway&pause >NUL
+set special_front=no
+IF %ERRORLEVEL%==0 echo off& cls&title Main&timeout 1 >NUL&set special_front=yes
+IF %ERRORLEVEL%==1 TITLE User Mode.&echo off&cls&echo. ----------------------------------------------------------------------------------&echo.^|This script cannot make changes to the Network without Administrative Priveleges ^|&echo. ----------------------------------------------------------------------------------&echo.&echo.What can you do:&echo.Run this script with administrative priveleges Next time ;)&timeout 1 >nul&echo.&echo.Press any key to continue (Not recommended) &pause >NUL
 set /a helper_interval=1600
 set /a break_interval=2
 REM set break_interval=0 to skip early messages..
@@ -18,26 +21,34 @@ REM make it shorter/longer if it still works for you
 REM In Milliseconds
 @echo off 
 title Starting...
+if %special_front%==no goto here
+mode 30,5
+echo.Cleaning Files..
+color B1 
+timeout 1 >NUL
+goto there
+:here
 mode 30,20
-echo.=== ATTENTION ===
+echo.   - ATTENTION -
+echo.This script generates
+echo.extra litter
 echo.
-echo./* initiating
 echo.   junk clean-up ! 
 echo.
-echo. 
+echo. Temporary
 echo.  Helper files
-echo.need to be cleaned.
+echo.need to be removed.
 echo.
 echo. 
 echo. using a helper window
-echo.~~
 echo.--------------------------
 ECHO.if files are not removed
 echo.increase %%helper_interval%% 
-echo.variable
+echo.             variable
 echo. --------------------------
 echo.Helper 
 color B1 
+:there
 timeout %break_interval% >NUL
 set /a randum=%random%
 REM start cmd /c "mode 57,7& echo off &cls & title The_Watcher&timeout 7 >NUL& del Delete_me_Csv.netcon.%randum%.CSV"
@@ -57,7 +68,7 @@ echo objFile.Write childScriptContent  >>PARENT_FAWNER_%RANDUM%.VBS
 echo objFile.Close  >>PARENT_FAWNER_%RANDUM%.VBS 
 echo Set objShell = CreateObject("WScript.Shell")  >>PARENT_FAWNER_%RANDUM%.VBS 
 echo objShell.Run childScriptFileName, 0, False  >>PARENT_FAWNER_%RANDUM%.VBS 
-start cmd /c "echo off &title Running VBS script...& ( for /l %%i in (1,1,50) do type delete_me_%randum%.vbs ) &cls& color C2 & ( for /l %%i in (1,1,20) do echo ALL the JUNK Files ARE Going To BE Deleted!  )"
+if %special_front%==no start cmd /c "echo off &title Running VBS script...& ( for /l %%i in (1,1,50) do type delete_me_%randum%.vbs ) &cls& color C2 & ( for /l %%i in (1,1,20) do echo ALL the JUNK Files ARE Going To BE Deleted!  )"
 wscript PARENT_FAWNER_%RANDUM%.VBS 
 rem mode 35,8 
 echo off
@@ -160,6 +171,7 @@ goto eof
 Rem.netsh interface set interface "%good_works%" disable 2>&1>con
 :enable
 echo.Enabling...
+echo.netsh interface set interface "%good_works%" enable
 netsh interface set interface "%good_works%" enable
 
 :eof
